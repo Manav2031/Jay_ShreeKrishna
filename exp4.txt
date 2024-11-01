@@ -1,0 +1,96 @@
+Experiment No.:4
+Code
+1. HTML 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Compare Strings</title>
+ <style>
+ body {
+ background-color: #f0f0f0;
+ font-family: Arial, sans-serif;
+ padding: 20px;
+ }
+ .container {
+ max-width: 400px;
+ margin: 0 auto;
+ background-color: #fff;
+ padding: 20px;
+ border: 1px solid #ccc;
+ border-radius: 8px;
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+ }
+ label, input, button {
+ display: block;
+ width: 100%;
+ margin: 10px 0;
+ padding: 8px;
+ }
+ button {
+ background-color: #4CAF50;
+ color: white;
+ border: none;
+ cursor: pointer;
+ }
+ button:hover {
+ background-color: #45a049;
+ }
+ </style>
+</head>
+<body>
+ <div class="container">
+ <h2>Compare Two Strings</h2>
+ <label for="string1">Enter first string:</label>
+ <input type="text" id="string1" placeholder="First string">
+ <label for="string2">Enter second string:</label>
+ <input type="text" id="string2" placeholder="Second string">
+ <button onclick="compareStrings()">Compare</button>
+ <h3>Results:</h3>
+ <p id="localeCompareResult"></p>
+ <p id="strictEqualityResult"></p>
+ <p id="combinedResult"></p>
+ </div>
+ <script src="scripts.js"></script>
+</body>
+</html>
+--------------------------------------------------------------------------------------------------------------------------------------------
+2. JS
+function compareStrings() {
+ let str1 = document.getElementById('string1').value;
+ let str2 = document.getElementById('string2').value;
+ // Using localeCompare()
+ let localeCompareResult = str1.localeCompare(str2);
+ let localeCompareMessage;
+ if (localeCompareResult < 0) {
+ localeCompareMessage = `"${str1}" is smaller than "${str2}"`;
+ } else if (localeCompareResult > 0) {
+ localeCompareMessage = `"${str1}" is greater than "${str2}"`;
+ } else {
+ localeCompareMessage = `"${str1}" is equal to "${str2}"`;
+ }
+ document.getElementById('localeCompareResult').innerText = `localeCompare result:
+${localeCompareMessage}`;
+ // Using strict equality (===)
+ let strictEqualityResult = (str1 === str2);
+ let strictEqualityMessage = strictEqualityResult ? `"${str1}" is exactly equal to "${str2}"` : `"${str1}" is not
+equal to "${str2}"`;
+ document.getElementById('strictEqualityResult').innerText = `Strict equality (===) result:
+${strictEqualityMessage}`;
+ // Using combination of localeCompare() and comparison operators with uppercase conversion
+ let upperStr1 = str1.toUpperCase();
+ let upperStr2 = str2.toUpperCase();
+ let localeCompareUpperResult = upperStr1.localeCompare(upperStr2);
+ let combinedResultMessage;
+ if (localeCompareUpperResult === 0) {
+ combinedResultMessage = `"${str1}" is equal to "${str2}"`;
+ } else if (localeCompareUpperResult < 0) {
+ combinedResultMessage = `"${str1}" is less than "${str2}"`;
+ } else {
+ combinedResultMessage = `"${str1}" is greater than "${str2}"`;
+ }
+ document.getElementById('combinedResult').innerText = `Combined localeCompare and comparison operators
+result: ${combinedResultMessage}`;
+}

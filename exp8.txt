@@ -1,0 +1,103 @@
+Experiment No.: 8
+1.CODE:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Background Color Change</title>
+</head>
+<body style="background-color: white; font-family: 'Arial', sans-serif;">
+<h1 style="text-align: center;">Interactive Background Color Change</h1>
+<div id="eventLabel" style="
+text-align: center;
+font-size: 24px;
+margin-bottom: 20px;
+">No event yet</div>
+<div style="
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 50px;
+margin-bottom: 50px;
+">
+<div id="hoverBox" tabindex="0" style="
+width: 300px;
+height: 300px;
+background-color: lightgray;
+display: flex;
+justify-content: center;
+align-items: center;
+border: 3px solid black;
+font-size: 22px;
+cursor: pointer;
+">Hover Over Me!</div>
+<div id="focusBox" tabindex="0" style="
+width: 300px;
+height: 300px;
+background-color: lightgray;
+display: flex;
+justify-content: center;
+align-items: center;
+border: 3px solid black;
+font-size: 22px;
+cursor: pointer;
+">Focus on Me!</div>
+</div>
+<script>
+const hoverBox = document.getElementById('hoverBox');
+const focusBox = document.getElementById('focusBox');
+const eventLabel = document.getElementById('eventLabel');
+const body = document.body;
+hoverBox.addEventListener('mouseover', function() {
+body.style.backgroundColor = 'lightblue';
+eventLabel.textContent = 'Mouseover Event';
+});
+hoverBox.addEventListener('mouseout', function() {
+body.style.backgroundColor = 'lightcoral';
+eventLabel.textContent = 'Mouse Left the Box';
+});
+focusBox.addEventListener('focus', function() {
+body.style.backgroundColor = 'lightgreen';
+eventLabel.textContent = 'Focus Event';
+});
+focusBox.addEventListener('blur', function() {
+body.style.backgroundColor = 'lightyellow';
+eventLabel.textContent = 'Focus Lost';
+});
+</script>
+</body>
+</html>
+
+
+JavaScript code:
+const hoverBox = document.getElementById('hoverBox');
+const focusBox = document.getElementById('focusBox');
+const eventLabel = document.getElementById('eventLabel');
+const body = document.body;
+const scaleUp = (box) => {
+box.style.transform = 'scale(1.1)';
+};
+const scaleDown = (box) => {
+box.style.transform = 'scale(1)';
+};
+hoverBox.addEventListener('mouseover', function() {
+body.style.backgroundColor = 'lightblue';
+eventLabel.textContent = 'Mouseover Event';
+scaleUp(hoverBox);
+});
+hoverBox.addEventListener('mouseout', function() {
+body.style.backgroundColor = 'white';
+eventLabel.textContent = 'Mouse Left the Box';
+scaleDown(hoverBox);
+});
+focusBox.addEventListener('focus', function() {
+body.style.backgroundColor = 'lightgreen';
+eventLabel.textContent = 'Focus Event';
+scaleUp(focusBox);
+});
+focusBox.addEventListener('blur', function() {
+body.style.backgroundColor = 'white';
+eventLabel.textContent = 'Focus Lost';
+scaleDown(focusBox);
+});

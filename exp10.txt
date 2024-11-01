@@ -1,0 +1,48 @@
+Experiment No.: 10
+1.CODE:
+HTML code:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multiplication Table</title>
+</head>
+<body>
+<h1>Multiplication table</h1>
+<script src="script.js"></script>
+</body>
+</html>
+
+
+JavaScript code:
+const readline = require('readline');
+const rl = readline.createInterface({
+input: process.stdin,
+output: process.stdout
+});
+rl.question('Enter the number for the multiplication table: ', function(table) {
+rl.question('Enter the length of the multiplication table: ', function(length) {
+table = parseInt(table);
+length = parseInt(length);
+console.log(`\nMultiplication Table for ${table} using do while loop:`);
+let i = 1;
+do {
+console.log(`${i} * ${table} = ${i * table}`);
+i++;
+} while (i <= length);
+console.log("\n");
+i = 1;
+console.log(`Multiplication Table for ${table} using while loop:`);
+while (i <= length) {
+console.log(`${i} * ${table} = ${i * table}`);
+i++;
+}
+console.log("\n");
+console.log(`Multiplication Table for ${table} using for loop:`);
+for (i = 1; i <= length; i++) {
+console.log(`${i} * ${table} = ${i * table}`);
+}
+rl.close();
+});
+});

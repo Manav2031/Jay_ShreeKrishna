@@ -1,0 +1,143 @@
+Experiment No.: 7
+1.CODE:
+HTML code:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Array and Object Operations</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+background-color: #f4f4f9;
+padding: 20px;
+text-align: center;
+}
+.container {
+max-width: 600px;
+margin: auto;
+padding: 20px;
+background-color: #fff;
+border-radius: 10px;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+input {
+margin: 10px;
+padding: 5px;
+font-size: 16px;
+}
+button {
+margin: 10px;
+padding: 10px;
+font-size: 16px;
+cursor: pointer;
+}
+#result {
+margin-top: 20px;
+font-size: 16px;
+color: #333;
+}
+.array-display {
+margin: 20px;
+padding: 10px;
+border: 1px solid #ddd;
+border-radius: 5px;
+background-color: #f9f9f9;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Array and Object Operations</h1>
+<h2>Create and Populate Array</h2>
+<label for="arraySize">Enter Array Size:</label>
+<input type="number" id="arraySize" placeholder="Size"><br>
+<button onclick="createArray()">Create Array</button>
+<div class="array-display">
+<strong>Current Array:</strong>
+<div id="arrayDisplay">[]</div>
+</div>
+<div id="populateSection" style="display:none;">
+<h2>Populate Array</h2>
+<label for="elementValue">Enter Element:</label>
+<input type="text" id="elementValue" placeholder="Element"><br>
+<button onclick="addElement()">Add Element</button>
+</div>
+<h2>Append Object to Array</h2>
+<label for="objectKey">Object Key:</label>
+<input type="text" id="objectKey" placeholder="Key"><br>
+<label for="objectValue">Object Value:</label>
+<input type="text" id="objectValue" placeholder="Value"><br>
+<button onclick="appendObject()">Append Object</button>
+<h2>Check if Last Appended Object is an Array</h2>
+<button onclick="checkIfLastObjectIsArray()">Check</button>
+<div id="result"></div>
+</div>
+<script src="Expt_7.js"></script>
+</body>
+</html>
+
+
+JavaScript code:
+let arr = [];
+let lastAppendedObject = null;
+function createArray() {
+const size = parseInt(document.getElementById('arraySize').value);
+if (isNaN(size) || size <= 0) {
+document.getElementById('result').innerHTML = 'Please enter a valid size.';
+return;
+}
+arr = new Array(size);
+document.getElementById('arrayDisplay').innerText = `Array: [${arr.join(', ')}]`;
+document.getElementById('populateSection').style.display = 'block';
+document.getElementById('result').innerHTML = '';
+}
+function addElement() {
+const element = document.getElementById('elementValue').value.trim();
+if (element === '') {
+document.getElementById('result').innerHTML = 'Please enter a valid element.';
+return;
+}
+const index = arr.findIndex(el => el === undefined);
+if (index !== -1) {
+arr[index] = element;
+document.getElementById('arrayDisplay').innerText = `Array: [${arr.join(', ')}]`;
+document.getElementById('elementValue').value = '';
+document.getElementById('result').innerHTML = '';
+} else {
+document.getElementById('result').innerHTML = 'Array is already full. Cannot add
+more elements.';
+}
+}
+function appendObject() {
+const key = document.getElementById('objectKey').value.trim();
+const valueText = document.getElementById('objectValue').value.trim();
+if (!key || !valueText) {
+document.getElementById('result').innerHTML = 'Please enter both key and value.';
+return;
+}
+let value;
+try {
+value = JSON.parse(valueText);
+} catch (error) {
+value = valueText;
+}
+const obj = { [key]: value };
+arr.push(obj);
+lastAppendedObject = obj;
+document.getElementById('arrayDisplay').innerText = `Array:
+[${arr.map(JSON.stringify).join(', ')}]`;
+document.getElementById('result').innerHTML = '';
+}
+function checkIfLastObjectIsArray() {
+if (lastAppendedObject === null) {
+document.getElementById('result').innerHTML = 'No object has been appended
+yet.';
+return;
+}
+const value = lastAppendedObject[Object.keys(lastAppendedObject)[0]];
+const isArray = Array.isArray(value);
+document.getElementById('result').innerHTML = `The last appended object is an
+array: ${isArray}`;
+}

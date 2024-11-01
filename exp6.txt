@@ -1,0 +1,145 @@
+Experiment No.:6
+1.CODE:
+HTML code:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Array Operations</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+background-color: #f4f4f9;
+padding: 20px;
+text-align: center;
+}
+.container {
+max-width: 600px;
+margin: auto;
+padding: 20px;
+background-color: #fff;
+border-radius: 10px;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+input {
+margin: 10px;
+padding: 5px;
+font-size: 16px;
+}
+button {
+margin: 10px;
+padding: 10px;
+font-size: 16px;
+cursor: pointer;
+}
+#arrayContent {
+margin-top: 10px;
+font-size: 18px;
+font-weight: bold;
+color: #333;
+}
+#results {
+margin-top: 20px;
+font-size: 16px;
+color: #333;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Array Operations</h1>
+<label for="arraySize">Set Array Size Limit:</label>
+<input type="number" id="arraySize" placeholder="Array Size">
+<button onclick="setArraySize()">Set Size</button>
+<label for="arrayElement">Add Element to Array:</label>
+<input type="text" id="arrayElement" placeholder="Element">
+<button onclick="addElement()">Add Element</button>
+<div id="arrayContent">Current Array: []</div>
+<label for="deleteElement">Element to Delete:</label>
+<input type="text" id="deleteElement" placeholder="Element to delete"><br>
+<label for="checkValue">Value to Check in Array:</label>
+<input type="text" id="checkValue" placeholder="Value to check"><br>
+<button onclick="performOperations()">Perform Operations</button>
+<button onclick="emptyArray()">Empty Array</button>
+<div id="results"></div>
+</div>
+<script src="Expt_6.js"></script>
+</body>
+</html>
+
+
+JavaScript code:
+let arr = [];
+let maxSize = 0;
+function updateArrayDisplay() {
+document.getElementById('arrayContent').innerText = `Current Array: [${arr.join(',
+')}]`;
+}
+function setArraySize() {
+const sizeInput = document.getElementById('arraySize').value;
+maxSize = parseInt(sizeInput, 10);
+if (isNaN(maxSize) || maxSize <= 0) {
+document.getElementById('results').innerHTML = 'Please enter a valid array size.';
+return;
+}
+document.getElementById('results').innerHTML = `Array size set to ${maxSize}.`;
+arr = [];
+updateArrayDisplay();
+}
+function addElement() {
+const element = document.getElementById('arrayElement').value.trim();
+if (!element) {
+document.getElementById('results').innerHTML = 'Please enter a valid element.';
+return;
+}
+if (arr.length >= maxSize) {
+document.getElementById('results').innerHTML = `Array has reached its limit of
+${maxSize} elements.`;
+return;
+}
+arr.push(element);
+document.getElementById('arrayElement').value = '';
+updateArrayDisplay();
+document.getElementById('results').innerHTML = '';
+}
+function removeElementStandard(element) {
+arr = arr.filter(item => item !== element);
+document.getElementById('results').innerHTML += `<p>Array after removal
+(standard method): [${arr}]</p>`;
+updateArrayDisplay();
+}
+function removeElementWithoutStandard(element) {
+let newArr = [];
+for (let i = 0; i < arr.length; i++) {
+if (arr[i] !== element) {
+newArr.push(arr[i]);
+}
+}
+arr = newArr;
+document.getElementById('results').innerHTML += `<p>Array after removal (manual
+method): [${arr}]</p>`;
+updateArrayDisplay();
+}
+function checkIfContains(value) {
+let contains = arr.includes(value);
+document.getElementById('results').innerHTML += `<p>Array contains '${value}':
+${contains}</p>`;
+}
+function emptyArray() {
+arr = [];
+updateArrayDisplay();
+document.getElementById('results').innerHTML = "<p>Array is now empty.</p>";
+}
+function performOperations() {
+let elementToDelete = document.getElementById("deleteElement").value.trim();
+let valueToCheck = document.getElementById("checkValue").value.trim();
+if (!elementToDelete || !valueToCheck) {
+document.getElementById('results').innerHTML = "Please fill out all fields.";
+return;
+}
+document.getElementById('results').innerHTML = '';
+removeElementStandard(elementToDelete);
+removeElementWithoutStandard(elementToDelete);
+checkIfContains(valueToCheck);
+}

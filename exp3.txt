@@ -1,0 +1,100 @@
+Code
+
+1. HTML 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>String Operations</title>
+ <script src="script.js" defer></script>
+ <style>
+ .operation {
+ margin-bottom: 20px;
+ }
+ </style>
+</head>
+<body>
+ <h1>String Operations</h1>
+ <label for="inputString">Enter a string:</label>
+ <input type="text" id="inputString">
+ <div class="operation">
+ <h3>1. Replace Character</h3>
+ <input type="text" id="charToReplace" placeholder="Character to replace">
+ <input type="text" id="replacementChar" placeholder="Replacement character">
+ <button onclick="replaceCharacter()">Replace Character</button>
+ <div id="replaceCharOutput"></div>
+ </div>
+ <div class="operation">
+ <h3>2. Reverse String</h3>
+ <button onclick="reverseString()">Reverse String</button>
+ <div id="reverseOutput"></div>
+ </div>
+ <div class="operation">
+ <h3>3. Replace Substring</h3>
+ <input type="text" id="oldSubstring" placeholder="Old substring">
+ <input type="text" id="newSubstring" placeholder="New substring">
+ <button onclick="replaceSubstring()">Replace Substring</button>
+ <div id="replaceSubstringOutput"></div>
+ </div>
+ <div class="operation">
+ <h3>4. Check Palindrome</h3>
+ <button onclick="checkPalindrome()">Check Palindrome</button>
+ <div id="palindromeOutput"></div>
+ </div>
+</body>
+</html>
+--------------------------------------------------------------------------------------------------------------------------------------------
+2. JS 
+function reverseString() {
+ const str = document.getElementById("inputString").value;
+ const reversed = reverse(str);
+ document.getElementById("reverseOutput").innerHTML = `Reversed String: ${reversed}`;
+}
+function reverse(str) {
+ let reversed = '';
+ for (let i = str.length - 1; i >= 0; i--) {
+ reversed += str[i];
+ }
+ return reversed;
+}
+function replaceCharacter() {
+ const str = document.getElementById("inputString").value;
+ const charToReplace = document.getElementById("charToReplace").value;
+ const replacementChar = document.getElementById("replacementChar").value;
+ const replacedString = replaceChars(str, charToReplace, replacementChar);
+ document.getElementById("replaceCharOutput").innerHTML = `String after replacing '${charToReplace}' with
+'${replacementChar}': ${replacedString}`;
+}
+function replaceChars(str, char, newChar) {
+ let replacedString = '';
+ for (let i = 0; i < str.length; i++) {
+ replacedString += str[i] === char ? newChar : str[i];
+ }
+ return replacedString;
+}
+function replaceSubstring() {
+ const str = document.getElementById("inputString").value;
+ const oldSubstring = document.getElementById("oldSubstring").value;
+ const newSubstring = document.getElementById("newSubstring").value;
+ const replacedString = replaceOldSubstring(str, oldSubstring, newSubstring);
+ document.getElementById("replaceSubstringOutput").innerHTML = `String after replacing '${oldSubstring}'
+with '${newSubstring}': ${replacedString}`;
+}
+function replaceOldSubstring(str, oldSubstring, newSubstring) {
+ let result = '';
+ let startIndex = 0;
+ while (true) {
+ const index = str.indexOf(oldSubstring, startIndex);
+ if (index === -1) break;
+ result += str.slice(startIndex, index) + newSubstring;
+ startIndex = index + oldSubstring.length;
+ }
+ result += str.slice(startIndex);
+ return result;
+}
+function checkPalindrome() {
+ const str = document.getElementById("inputString").value;
+ const isPalindrome = str === reverse(str);
+ document.getElementById("palindromeOutput").innerHTML = `Is the string a palindrome? ${isPalindrome}`;
+} 

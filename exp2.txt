@@ -1,0 +1,38 @@
+Code
+
+1. HTML File
+<!DOCTYPE html>
+<html lang="en">
+<body style="text-align: center;">
+ <h1>Multiplication Table</h1>
+ <script src="exp2.js"></script>
+
+</body>
+</html>
+
+2. JS File
+var table =7;
+var length=10;
+var i=1;
+document.write("Multiplication Table using do-while:");
+do{
+ document.write("<br>"+table+"*"+i+"="+(i*table));
+ i++;
+}while(i<=length)
+document.write("<br><br>");
+var table=9;
+var length=10;
+var i=1;
+document.write("Multiplication Table using for loop");
+for(i=1;i<=length;i++){
+ document.write("<br>"+table+"*"+i+"="+(i*table));
+}
+document.write("<br><br>");
+var table=4;
+var length=10;
+var i=1;
+document.write("Multiplication Table using while loop");
+while(i<=length){
+ document.write("<br>"+table+"*"+i+"="+(i*table));
+ i++;
+}

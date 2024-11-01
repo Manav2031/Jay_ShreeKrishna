@@ -1,0 +1,147 @@
+Experiment No.: 9
+1.CODE:
+HTML code:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Information Form</title>
+</head>
+<body style="display: flex; justify-content: center; align-items: center; height: 100vh;
+margin: 0; background-color: #f0f8ff; font-family: Arial, sans-serif;">
+<div style="padding: 20px; border: 2px solid #333; border-radius: 10px; backgroundcolor: #fafafa; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);">
+<h1 style="text-align: center; margin-bottom: 20px;">Student Information
+Form</h1>
+<form id="studentForm">
+<div style="margin-bottom: 15px;">
+<label for="name"><b>Name:</b></label><br>
+<input type="text" id="name" name="name" required placeholder="Enter your
+name" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+</div>
+<div style="margin-bottom: 15px;">
+<label for="address"><b>Address:</b></label><br>
+<input type="text" id="address" name="address" required placeholder="Enter
+your address" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid
+#ccc;">
+</div>
+<div style="margin-bottom: 15px;">
+<label for="city"><b>City:</b></label><br>
+<input type="text" id="city" name="city" required placeholder="Enter your
+city" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+</div>
+<div style="margin-bottom: 15px;">
+<label for="state"><b>State:</b></label><br>
+<input type="text" id="state" name="state" required placeholder="Enter your
+state" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+</div>
+<div style="margin-bottom: 15px;">
+<label><b>Gender:</b></label><br>
+<label><input type="radio" id="male" name="gender" value="Male" required>
+Male</label>
+<label><input type="radio" id="female" name="gender" value="Female"
+required> Female</label>
+</div>
+<div style="margin-bottom: 15px;">
+<label for="mobile"><b>Mobile:</b></label><br>
+<input type="text" id="mobile" name="mobile" required placeholder="Enter
+your mobile number" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px
+solid #ccc;">
+</div>
+<div style="margin-bottom: 15px;">
+<label for="email"><b>Email:</b></label><br>
+<input type="email" id="email" name="email" required placeholder="Enter
+your email" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid
+#ccc;">
+</div>
+<div style="text-align: center;">
+<button type="submit" style="padding: 10px 20px; background-color:
+#28a745; color: white; border: none; border-radius: 5px; cursor:
+pointer;">Submit</button>
+</div>
+</form>
+<div id="message" style="margin-top: 20px; color: red;"></div>
+</div>
+<script src="Expt_9.js"></script>
+</body>
+</html>
+Welcome.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome</title>
+<style>
+body {
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+margin: 0;
+background-color: #f0f8ff;
+font-family: Arial, sans-serif;
+}
+.container {
+text-align: center;
+padding: 20px;
+border: 2px solid #333;
+border-radius: 10px;
+background-color: #fafafa;
+box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+}
+h1 {
+color: #28a745;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Welcome to the Student Portal!</h1>
+<p>Your form was submitted successfully.</p>
+</div>
+</body>
+</html>
+
+
+JavaScript code:
+document.getElementById('studentForm').addEventListener('submit', function(event) {
+event.preventDefault();
+let name = document.getElementById('name').value.trim();
+let address = document.getElementById('address').value.trim();
+let city = document.getElementById('city').value.trim();
+let state = document.getElementById('state').value.trim();
+let gender = document.querySelector('input[name="gender"]:checked');
+let mobile = document.getElementById('mobile').value.trim();
+let email = document.getElementById('email').value.trim();
+let message = document.getElementById('message');
+message.innerHTML = '';
+if (!name || name.length < 3) {
+message.innerHTML += '<p>Please enter a valid name (minimum 3
+characters).</p>';
+}
+if (!address || address.length < 5) {
+message.innerHTML += '<p>Please enter a valid address (minimum 5
+characters).</p>';
+}
+if (!city) {
+message.innerHTML += '<p>Please enter a valid city name.</p>';
+}
+if (!state) {
+message.innerHTML += '<p>Please enter a valid state name.</p>';
+}
+if (!gender) {
+message.innerHTML += '<p>Please select a gender.</p>';
+}
+let mobileRegex = /^[0-9]{10}$/;
+if (!mobileRegex.test(mobile)) {
+message.innerHTML += '<p>Please enter a valid 10-digit mobile number.</p>';
+}
+let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+if (!emailRegex.test(email)) {
+message.innerHTML += '<p>Please enter a valid email address.</p>';
+}
+if (message.innerHTML === '') {
+window.location.href = "Welcome.html";
+}
+});

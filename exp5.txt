@@ -1,0 +1,65 @@
+1. HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Countdown Timer</title>
+</head>
+<body>
+ <h1>Countdown Timer</h1>
+ <!-- Input field to enter the date -->
+ <label for="endDate">Enter Date and Time (YYYY-MM-DDTHH:MM:SS):</label>
+ <input type="datetime-local" id="endDate">
+
+ <!-- Button to start the countdown -->
+ <button onclick="startCountdown()">Start Countdown</button>
+ <!-- Display the countdown here -->
+ <h2 id="countdown">
+ Days: <span id="days"></span><br>
+ Hours: <span id="hours"></span><br>
+ Minutes: <span id="minutes"></span><br>
+ Seconds: <span id="seconds"></span>
+ </h2>
+ <!-- Linking the JavaScript file -->
+ <script src="script.js"></script>
+</body>
+</html>
+--------------------------------------------------------------------------------------------------------------------------------------------
+2. JS
+// Function to start the countdown
+function startCountdown() {
+ // Get the input value from the user
+ let inputDate = document.getElementById("endDate").value;
+
+ // Parse the user input into a Date object
+ let endDate = new Date(inputDate).getTime();
+ // Clear any existing countdown to avoid duplicates
+ clearInterval(window.countdown);
+ // Set an interval to update the countdown every second
+ window.countdown = setInterval(function() {
+ // Get the current date and time
+ let now = new Date().getTime();
+
+ // Calculate the difference between the input date and the current date
+ let timeRemaining = endDate - now;
+
+ if (timeRemaining > 0) {
+ // Time calculations for days, hours, minutes, and seconds
+ let days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+ let hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+ let minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+ let seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+ // Output the result to the DOM
+ document.getElementById("days").innerHTML = days;
+ document.getElementById("hours").innerHTML = hours;
+ document.getElementById("minutes").innerHTML = minutes;
+ document.getElementById("seconds").innerHTML = seconds;
+ } else {
+ // If the countdown is over, display "Expired!"
+ clearInterval(window.countdown);
+ document.getElementById("countdown").innerHTML = "Expired!";
+ }
+ }, 1000); // Run every 1 second
+} 
