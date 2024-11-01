@@ -1,0 +1,102 @@
+Code
+
+1. HTML File
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Javascript Experiment 1</title>
+ <style>
+ body {
+ font-family: Arial, sans-serif;
+ background-color: #f0f0f0;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ height: 100vh;
+ margin: 0;
+ }
+ h1 {
+ color: #333;
+ }
+ form {
+ background: #fff;
+ padding: 20px;
+ border-radius: 10px;
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+ width: 300px;
+ }
+ label {
+ display: block;
+ margin-top: 10px;
+ font-weight: bold;
+ }
+ input[type="number"], input[type="text"] {
+ width: 100%;
+ padding: 8px;
+ margin-top: 5px;
+ border: 1px solid #ccc;
+ border-radius: 5px;
+ box-sizing: border-box;
+ }
+ input[type="text"] {
+ background-color: #f0f0f0;
+ }
+ </style>
+</head>
+<body>
+ <form>
+ <label for="Rectangle">Rectangle:</label>
+ <label for="length">Length:</label>
+ <input type="number" id="length" name="length">
+
+ <label for="breadth">Breadth:</label>
+ <input type="number" id="breadth" name="breadth">
+
+ <label for="Circle">Circle:</label>
+
+ <label for="radius">Radius:</label>
+ <input type="number" id="radius" name="radius">
+
+ <label for="triangle">Triangle:</label>
+
+ <label for="a">A:</label>
+ <input type="number" id="a" name="a">
+
+ <label for="b">B:</label>
+ <input type="number" id="b" name="b">
+
+ <label for="c">C:</label>
+ <input type="number" id="c" name="c">
+ <input type="button" onclick="myFunction()" value="Submit">
+
+ <label for="rectangleArea">Rectangle Area:</label>
+ <input type="text" id="rectangleArea" name="rectangleArea"
+readonly>
+
+ <label for="circleArea">Circle Area:</label>
+ <input type="text" id="circleArea" name="circleArea" readonly>
+
+ <label for="triangleArea">Triangle Area:</label>
+ <input type="text" id="triangleArea" name="triangleArea" readonly>
+ </form>
+ <script src="exp1.js"></script>
+</body>
+</html>
+
+2. JS File
+function myFunction() {
+ const length = document.getElementById('length').value;
+ const breadth = document.getElementById('breadth').value;
+ const radius = document.getElementById('radius').value;
+ const a = parseInt(document.getElementById('a').value);
+ const b = parseInt(document.getElementById('b').value);
+ const c = parseInt(document.getElementById('c').value);
+ const rectangleArea = length * breadth;
+ const circleArea = Math.PI * Math.pow(radius, 2);
+ const s=(a+b+c)/2
+ const triangleArea = Math.sqrt(s * (s - a) * (s - b) * (s - c));
+ document.getElementById('rectangleArea').value = rectangleArea;
+ document.getElementById('circleArea').value = circleArea.toFixed(2);
+ document.getElementById('triangleArea').value = triangleArea;
+}
